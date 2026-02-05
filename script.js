@@ -6,6 +6,7 @@
 const screens = {
     intro: document.getElementById('screen-intro'),
     catch: document.getElementById('screen-catch'),
+    matchIntro: document.getElementById('screen-match-intro'),
     memory: document.getElementById('screen-memory'),
     message: document.getElementById('screen-message'),
     question: document.getElementById('screen-question')
@@ -25,6 +26,9 @@ function showScreen(screenName) {
         // Initialize screen-specific content
         if (screenName === 'catch') {
             initCatchGame();
+        } else if (screenName === 'matchIntro') {
+            // Auto-advance to memory game after 2.5 seconds
+            setTimeout(() => showScreen('memory'), 2500);
         } else if (screenName === 'memory') {
             initMemoryGame();
         }
@@ -207,7 +211,7 @@ function gameLoop() {
                 if (catchGame.score >= 10) {
                     catchGame.gameRunning = false;
                     document.getElementById('catchWinMessage').classList.add('show');
-                    setTimeout(() => showScreen('memory'), 2000);
+                    setTimeout(() => showScreen('matchIntro'), 3500);
                 }
             } else {
                 // Bad heart - reduce score but don't go below 0
@@ -247,7 +251,6 @@ function initMemoryGame() {
     memoryGame.matchedPairs = 0;
     memoryGame.canFlip = true;
 
-    document.getElementById('pairsFound').textContent = '0';
     document.getElementById('memoryWinMessage').classList.remove('show');
 
     // Card images (6 pairs) - photos from images folder
@@ -305,7 +308,6 @@ function checkMatch() {
         card1.classList.add('matched');
         card2.classList.add('matched');
         memoryGame.matchedPairs++;
-        document.getElementById('pairsFound').textContent = memoryGame.matchedPairs;
 
         memoryGame.flippedCards = [];
         memoryGame.canFlip = true;
@@ -315,7 +317,7 @@ function checkMatch() {
             setTimeout(() => {
                 document.getElementById('memoryWinMessage').classList.add('show');
                 createMiniConfetti();
-                setTimeout(() => showScreen('message'), 2500);
+                setTimeout(() => showScreen('message'), 3500);
             }, 500);
         }
     } else {
