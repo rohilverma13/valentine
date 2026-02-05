@@ -191,21 +191,21 @@ body {
 /* Screen 4: Memory Game */
 #screen-memory {
     background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
-    padding-top: env(safe-area-inset-top, 20px);
-    padding-bottom: env(safe-area-inset-bottom, 20px);
+    padding-top: calc(env(safe-area-inset-top, 20px) + 10px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 10px);
 }
 
 .memory-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    max-width: 320px;
-    width: 85%;
-    max-height: 80%;
+    gap: 6px;
+    max-width: 300px;
+    width: 80%;
+    height: auto;
 }
 
 .memory-card {
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 9 / 14;
     perspective: 1000px;
     cursor: pointer;
 }
