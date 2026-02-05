@@ -6,6 +6,7 @@
 const screens = {
     intro: document.getElementById('screen-intro'),
     catch: document.getElementById('screen-catch'),
+    matchIntro: document.getElementById('screen-match-intro'),
     memory: document.getElementById('screen-memory'),
     message: document.getElementById('screen-message'),
     question: document.getElementById('screen-question')
@@ -25,6 +26,9 @@ function showScreen(screenName) {
         // Initialize screen-specific content
         if (screenName === 'catch') {
             initCatchGame();
+        } else if (screenName === 'matchIntro') {
+            // Auto-advance to memory game after showing "match these"
+            setTimeout(() => showScreen('memory'), 1500);
         } else if (screenName === 'memory') {
             initMemoryGame();
         }
@@ -207,7 +211,7 @@ function gameLoop() {
                 if (catchGame.score >= 10) {
                     catchGame.gameRunning = false;
                     document.getElementById('catchWinMessage').classList.add('show');
-                    setTimeout(() => showScreen('memory'), 2000);
+                    setTimeout(() => showScreen('matchIntro'), 2000);
                 }
             } else {
                 // Bad heart - reduce score but don't go below 0

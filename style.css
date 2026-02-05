@@ -166,7 +166,19 @@ body {
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* Screen 3: Memory Game */
+/* Screen 3: Match Intro */
+#screen-match-intro {
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+}
+
+.match-intro-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    color: #d63384;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* Screen 4: Memory Game */
 #screen-memory {
     background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
 }
@@ -177,7 +189,7 @@ body {
     gap: 8px;
     max-width: 340px;
     width: 90%;
-    margin-top: 80px;
+    margin-top: 0;
 }
 
 .memory-card {
