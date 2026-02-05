@@ -1,0 +1,461 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 50%, #ffe4ec 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+/* Floating Hearts Background */
+.hearts-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Screen Styles */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.screen.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Screen 1: Intro */
+.intro-content {
+    text-align: center;
+    max-width: 90%;
+}
+
+.intro-content h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    color: #d63384;
+    margin-bottom: 40px;
+    min-height: 100px;
+}
+
+.tap-prompt {
+    font-size: 1.2rem;
+    color: #e75480;
+    opacity: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.tap-prompt.visible {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Screen 2: Catch Hearts Game */
+#screen-catch {
+    background: linear-gradient(180deg, #87CEEB 0%, #E6E6FA 50%, #FFB6C1 100%);
+    padding: 10px;
+}
+
+.game-header {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.game-header h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.2rem;
+    color: #d63384;
+    margin-bottom: 0px;
+}
+
+.score, .pairs-count {
+    font-size: 1.2rem;
+    color: #c71585;
+    font-weight: 600;
+}
+
+#catchCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.game-win-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 192, 203, 0.95);
+    z-index: 20;
+}
+
+.game-win-message.show {
+    display: flex;
+}
+
+.game-win-message h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: #d63384;
+    text-align: center;
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Screen 3: Memory Game */
+#screen-memory {
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 340px;
+    width: 90%;
+    margin-top: 80px;
+}
+
+.memory-card {
+    aspect-ratio: 9 / 16;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.memory-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-card-inner {
+    transform: rotateY(180deg);
+}
+
+.memory-card-front,
+.memory-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+}
+
+.memory-card-front {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+}
+
+.memory-card-front::after {
+    content: '💕';
+    font-size: clamp(1.2rem, 6vw, 2rem);
+}
+
+.memory-card-back {
+    background: white;
+    transform: rotateY(180deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.memory-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.memory-card.matched {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.memory-card.matched .memory-card-inner {
+    animation: matchPulse 0.5s ease;
+}
+
+@keyframes matchPulse {
+    50% { transform: rotateY(180deg) scale(1.1); }
+}
+
+/* Screen 4: Custom Message */
+#screen-message {
+    background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 100%);
+}
+
+.message-content {
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.love-message {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: #c71585;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.continue-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
+    transition: all 0.3s ease;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 105, 180, 0.5);
+}
+
+.continue-btn:active {
+    transform: translateY(0);
+}
+
+/* Screen 5: The Question */
+#screen-question {
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 100%);
+}
+
+.question-content {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.question-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 7vw, 3rem);
+    color: #d63384;
+    margin-bottom: 50px;
+    animation: fadeInUp 1s ease;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 18px 50px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
+    animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4); }
+    50% { box-shadow: 0 4px 30px rgba(255, 105, 180, 0.6); }
+}
+
+.btn-yes:hover {
+    transform: scale(1.05);
+}
+
+.btn-no {
+    background: #ccc;
+    color: #666;
+    padding: 12px 30px;
+    font-size: 1rem;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.btn-no:hover {
+    background: #bbb;
+}
+
+/* Celebration */
+.celebration {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.celebration.show {
+    display: flex;
+}
+
+.celebration-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(3rem, 15vw, 6rem);
+    color: #d63384;
+    animation: celebrateBounce 0.8s ease;
+}
+
+@keyframes celebrateBounce {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-message {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: #e75480;
+    margin-top: 20px;
+    animation: fadeInUp 1s ease 0.5s both;
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Rising hearts for celebration */
+.rising-heart {
+    position: absolute;
+    font-size: 30px;
+    animation: riseUp 3s ease-out forwards;
+}
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Screen 1: Intro -->
+    <div class="screen active" id="screen-intro">
+        <div class="intro-content">
+            <h1 class="typewriter" id="introText"></h1>
+            <p class="tap-prompt" id="tapPrompt">Tap to start 💕</p>
+        </div>
+    </div>
+
+    <!-- Screen 2: Catch Hearts Game -->
+    <div class="screen" id="screen-catch">
+        <div class="game-header">
+            <h2>catch these</h2>
+            <div class="score">💕 <span id="catchScore">0</span> / 10</div>
+        </div>
+        <canvas id="catchCanvas"></canvas>
+        <div class="game-win-message" id="catchWinMessage">
+            <h2>you always catch my eye👁️👅👁️</h2>
+        </div>
+    </div>
+
+    <!-- Screen 3: Memory Game -->
+    <div class="screen" id="screen-memory">
+        <div class="game-header">
+            <h2>match these</h2>
+            <div class="pairs-count">Pairs: <span id="pairsFound">0</span> / 6</div>
+        </div>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <div class="game-win-message" id="memoryWinMessage">
+            <h2>perfect match just like us😏</h2>
+        </div>
+    </div>
+
+    <!-- Screen 4: Custom Message -->
+    <div class="screen" id="screen-message">
+        <div class="message-content">
+            <p class="love-message" id="loveMessage">
+                i love you so much baby thanks for being the best :D
+            </p>
+            <button class="continue-btn" id="continueBtn">Continue 💕</button>
+        </div>
+    </div>
+
+    <!-- Screen 5: The Question -->
+    <div class="screen" id="screen-question">
+        <div class="question-content" id="questionContent">
+            <h1 class="question-text">will you be my valentine🫣</h1>
+            <div class="buttons-container">
+                <button class="btn btn-yes" id="yesBtn">obviously😝</button>
+                <button class="btn btn-no" id="noBtn">oh hell nah</button>
+            </div>
+        </div>
+
+        <!-- Celebration (hidden initially) -->
+        <div class="celebration" id="celebration">
+            <h1 class="celebration-text">💕😍❤️💘🥰💖</h1>
+            <p class="celebration-message">im so lucky</p>
+            <div class="confetti-container" id="confettiContainer"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
