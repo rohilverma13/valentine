@@ -208,7 +208,7 @@ function gameLoop() {
                 document.getElementById('catchScore').textContent = catchGame.score;
 
                 // Check win condition
-                if (catchGame.score >= 10) {
+                if (catchGame.score >= 1) {
                     catchGame.gameRunning = false;
                     document.getElementById('catchWinMessage').classList.add('show');
                     setTimeout(() => showScreen('matchIntro'), 2000);
@@ -251,7 +251,6 @@ function initMemoryGame() {
     memoryGame.matchedPairs = 0;
     memoryGame.canFlip = true;
 
-    document.getElementById('pairsFound').textContent = '0';
     document.getElementById('memoryWinMessage').classList.remove('show');
 
     // Card images (6 pairs) - photos from images folder
@@ -309,7 +308,6 @@ function checkMatch() {
         card1.classList.add('matched');
         card2.classList.add('matched');
         memoryGame.matchedPairs++;
-        document.getElementById('pairsFound').textContent = memoryGame.matchedPairs;
 
         memoryGame.flippedCards = [];
         memoryGame.canFlip = true;
