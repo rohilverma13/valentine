@@ -211,7 +211,7 @@ function gameLoop() {
                 if (catchGame.score >= 1) {
                     catchGame.gameRunning = false;
                     document.getElementById('catchWinMessage').classList.add('show');
-                    setTimeout(() => showScreen('matchIntro'), 2000);
+                    setTimeout(() => showScreen('matchIntro'), 4000);
                 }
             } else {
                 // Bad heart - reduce score but don't go below 0
@@ -317,7 +317,7 @@ function checkMatch() {
             setTimeout(() => {
                 document.getElementById('memoryWinMessage').classList.add('show');
                 createMiniConfetti();
-                setTimeout(() => showScreen('message'), 2500);
+                setTimeout(() => showScreen('message'), 4000);
             }, 500);
         }
     } else {
